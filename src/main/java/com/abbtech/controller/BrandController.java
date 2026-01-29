@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/brands")
 public class BrandController {
 
     private final BrandService brandService;
@@ -22,25 +22,39 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @GetMapping("/brands")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<RespBrandDto> getBrands() {
         return brandService.getBrands();
     }
 
-    @GetMapping("/brands/by-id")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public RespBrandDto getBrandById(@RequestParam(value = "id") Integer id) {
+    @GetMapping("/by-id")
+    @ResponseStatus(HttpStatus.OK)
+    public RespBrandDto getBrandById(@RequestParam("id") Integer id) {
         return brandService.getBrandById(id);
     }
 
-    @PostMapping("/brands")
-    public void addBrand(@RequestBody @Validated(value = BrandGroupA.class) @Valid ReqBrandDto reqBrandDto) {
-        brandService.addBrand(reqBrandDto);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addBrand(@RequestBody @Validated(BrandGroupA.class) @Valid ReqBrandDto brandDto) {
+        brandService.addBrand(brandDto);
     }
 
-    @PostMapping("/brands/groupb")
-    public void addBrandGroupB(@RequestBody @Validated(value = BrandGroupB.class) @Valid ReqBrandDto reqBrandDto) {
-        brandService.addBrand(reqBrandDto);
+    @PostMapping("/groupb")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addBrandGroupB(@RequestBody @Validated(BrandGroupB.class) @Valid ReqBrandDto brandDto) {
+        brandService.addBrand(brandDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBrand(@PathVariable int id) {
+        brandService.deleteBrandById(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateBrand(@PathVariable int id, @RequestBody @Valid ReqBrandDto brandDto) {
+        brandService.updateBrand(id, brandDto);
     }
 }

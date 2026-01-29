@@ -11,5 +11,4 @@ public record CarDto(
         Integer modelId,
         CarDetailsDto carDetails,
         List<Integer> featureIds
-) {
-}
+) {}

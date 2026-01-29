@@ -7,6 +7,4 @@ public record RespBrandDto(
         String name,
         String country,
         List<ModelDto> models
-) {
-}
-
+) {}

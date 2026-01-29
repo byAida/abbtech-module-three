@@ -7,13 +7,14 @@ import jakarta.validation.constraints.*;
 import java.util.List;
 
 public record ReqBrandDto(
-        @NotBlank(message = "name can not be empty or null", groups = BrandGroupA.class) String name,
+        @NotBlank(message = "Brand name cannot be empty", groups = BrandGroupA.class)
+        String name,
         String country,
-        @Positive(message = "founded year must be positive")
+        @Positive(message = "Founded year must be positive")
         @Min(1900)
         @Max(2100)
         Integer foundedYear,
-        @Size(min = 1, message = "at least one model is required,max=2", max = 2)
-        @Valid List<ModelDto> models
-) {
-}
+        @Size(min = 1, max = 2, message = "At least 1 model and max 2 models are allowed")
+        @Valid
+        List<ModelDto> models
+) {}

@@ -8,6 +8,4 @@ public record CarDetailsDto(
         String insuranceNumber,
         String fuelType,
         String engineCapacity
-) {
-}
-
+) {}

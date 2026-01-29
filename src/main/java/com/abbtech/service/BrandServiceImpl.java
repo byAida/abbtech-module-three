@@ -32,7 +32,6 @@ public class BrandServiceImpl implements BrandService {
                 .toList();
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public RespBrandDto getBrandById(int id) {
@@ -44,19 +43,22 @@ public class BrandServiceImpl implements BrandService {
     @Override
     @Transactional
     public void addBrand(ReqBrandDto brandDto) {
-        var brand = Brand.builder()
+        Brand brand = Brand.builder()
                 .name(brandDto.name())
                 .country(brandDto.country())
                 .foundedYear(brandDto.foundedYear())
                 .build();
-        var models = brandDto.models().stream()
+
+        List<Model> models = brandDto.models().stream()
                 .map(modelDto -> Model.builder()
                         .brand(brand)
-                        .category(modelDto.category())
                         .name(modelDto.name())
+                        .category(modelDto.category())
                         .yearFrom(modelDto.yearFrom())
                         .yearTo(modelDto.yearTo())
-                        .build()).toList();
+                        .build())
+                .toList();
+
         brand.setModels(models);
         brandRepository.save(brand);
     }
@@ -66,10 +68,8 @@ public class BrandServiceImpl implements BrandService {
     public void deleteBrandById(int id) {
         Brand brand = brandRepository.findById(id)
                 .orElseThrow(() -> new CarException(CarErrorEnum.BRAND_NOT_FOUND));
-
         brandRepository.delete(brand);
     }
-
 
     @Override
     @Transactional
@@ -91,7 +91,8 @@ public class BrandServiceImpl implements BrandService {
                         model.getName(),
                         model.getCategory(),
                         model.getYearFrom(),
-                        model.getYearTo()
+                        model.getYearTo(),
+                        brand.getId()
                 ))
                 .toList();
 
@@ -102,6 +103,4 @@ public class BrandServiceImpl implements BrandService {
                 models
         );
     }
-
-
 }
