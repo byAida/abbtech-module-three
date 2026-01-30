@@ -1,13 +1,11 @@
-package com.example.task23;
-
+package com.example.abbtechcarservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Task23Application {
+public class AbbtechCarServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Task23Application.class, args);
+        SpringApplication.run(AbbtechCarServiceApplication.class, args);
     }
-
 }

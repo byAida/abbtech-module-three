@@ -44,4 +44,12 @@ public class Car {
             inverseJoinColumns = @JoinColumn(name = "feature_id")
     )
     private List<Feature> features;
+
+    @ManyToMany
+    @JoinTable(
+            name = "car_service",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
+    )
+    private List<ServiceEntity> services;
 }

@@ -1,29 +1,14 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.1'
-    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.5'
 }
 
-<<<<<<< HEAD
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-description = 'Task23'
-=======
 group = 'com.abbtech'
-version = '0.0.1-SNAPSHOT'
-description = 'abbtech-module-three'
->>>>>>> 13ee708c9131329b93e5b9b26a8d3a1b8a6b570d
+version = '1.0.0'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-    }
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -31,37 +16,26 @@ repositories {
 }
 
 dependencies {
-<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    implementation 'org.springframework.boot:spring-boot-starter-logging'
-    implementation 'com.h2database:h2'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-=======
-
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.20.1")
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    testImplementation 'org.springframework.boot:spring-boot-starter-liquibase-test'
-    compileOnly 'org.projectlombok:lombok'
-
-    annotationProcessor 'org.projectlombok:lombok'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-
-    runtimeOnly 'org.postgresql:postgresql'
-
->>>>>>> 13ee708c9131329b93e5b9b26a8d3a1b8a6b570d
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
