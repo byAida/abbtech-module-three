@@ -1,0 +1,49 @@
+- changeSet:
+    id: 25-create-service-table
+    author: aida
+    changes:
+      - createTable:
+          tableName: service
+          columns:
+            - column:
+                name: id
+                type: bigint
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+            - column:
+                name: name
+                type: varchar(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: price
+                type: decimal(10,2)
+                constraints:
+                  nullable: false
+
+- changeSet:
+    id: 26-create-car-service-table
+    author: aida
+    changes:
+      - createTable:
+          tableName: car_service
+          columns:
+            - column:
+                name: car_id
+                type: bigint
+            - column:
+                name: service_id
+                type: bigint
+      - addForeignKeyConstraint:
+          baseTableName: car_service
+          baseColumnNames: car_id
+          referencedTableName: car
+          referencedColumnNames: id
+          constraintName: fk_car_service_car
+      - addForeignKeyConstraint:
+          baseTableName: car_service
+          baseColumnNames: service_id
+          referencedTableName: service
+          referencedColumnNames: id
+          constraintName: fk_car_service_service

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+          http://www.liquibase.org/xml/ns/dbchangelog
+          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- BRAND -->
+    <changeSet id="1" author="aida">
+        <createTable tableName="brand">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="country" type="varchar(255)"/>
+            <column name="founded_year" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <!-- MODEL -->
+    <changeSet id="2" author="aida">
+        <createTable tableName="model">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="category" type="varchar(255)"/>
+            <column name="year_from" type="int"/>
+            <column name="year_to" type="int"/>
+            <column name="brand_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <!-- CAR -->
+    <changeSet id="3" author="aida">
+        <createTable tableName="car">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="vin" type="varchar(20)"/>
+            <column name="registration_number" type="varchar(10)"/>
+            <column name="mileage_km" type="int"/>
+            <column name="production_year" type="int"/>
+            <column name="model_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <!-- SERVICE -->
+    <changeSet id="4" author="aida">
+        <createTable tableName="service">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="price" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <!-- CAR_SERVICE -->
+    <changeSet id="5" author="aida">
+        <createTable tableName="car_service">
+            <column name="car_id" type="int"/>
+            <column name="service_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
